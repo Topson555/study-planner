@@ -1,0 +1,55 @@
+:root {
+    --dark-blue: #0A192F;
+    --primary-color: #0052CC;
+    --hover-color: #0043A4;
+    --sidebar-width: 240px;
+}
+
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background-color: #F3F4F6 !important;
+}
+
+.bg-dark-blue { background-color: var(--dark-blue) !important; }
+.text-dark-blue { color: var(--dark-blue) !important; }
+.btn-primary { background-color: var(--primary-color) !important; border-color: var(--primary-color) !important; }
+.btn-primary:hover { background-color: var(--hover-color) !important; border-color: var(--hover-color) !important; }
+
+.fw-black { font-weight: 800; }
+
+/* Desktop Fixed Sidebar System layout overrides */
+@media (min-width: 768px) {
+    .sidebar {
+        width: var(--sidebar-width);
+        height: 100vh;
+    }
+    #dashboard-view main {
+        margin-left: var(--sidebar-width) !important;
+        width: calc(100% - var(--sidebar-width)) !important;
+    }
+}
+
+/* Landing Page Preview Card Animation Accent */
+.transform-preview {
+    transition: transform 0.3s ease;
+}
+.transform-preview:hover {
+    transform: scale(1.02) rotate(0.5deg);
+}
+
+.sidebar-nav-btn {
+    transition: all 0.2s ease;
+}
+.sidebar-nav-btn.active-route-btn {
+    background-color: rgba(0, 82, 204, 0.15) !important;
+    color: #FFF !important;
+    font-weight: 600;
+}
+
+.task-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.task-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.06) !important;
+}
