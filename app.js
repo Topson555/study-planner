@@ -61,12 +61,17 @@ document.querySelectorAll(".sidebar-nav-btn").forEach(btn => {
     });
 });
 
-// --- STATE SECURITY WATCHERS ---
+ 
+// --- UPDATE YOUR AUTH WATCHER TO THIS ---
 onAuthStateChanged(auth, (user) => {
+    // Target our new global loader wrapper
+    const globalLoader = document.getElementById("global-loader");
+
     if (user) {
         currentUserId = user.uid;
         document.getElementById("sidebar-user-id").textContent = user.email.split('@')[0];
         document.getElementById("profile-display-email").textContent = user.email;
+        
         transitionGlobalView("dashboard");
         streamTasksPipeline();
         streamResourcesPipeline();
@@ -74,8 +79,14 @@ onAuthStateChanged(auth, (user) => {
         currentUserId = null;
         if (activeTaskListener) activeTaskListener();
         if (activeResourceListener) activeResourceListener();
-        // Redirect back to Landing View gracefully if session ends or is absent
+        
+        // Go to landing page ONLY if verified that no token exists
         transitionGlobalView("landing");
+    }
+
+    // Hide the global loading overlay once Firebase gives us a clear answer
+    if (globalLoader) {
+        globalLoader.classList.add("d-none");
     }
 });
 
